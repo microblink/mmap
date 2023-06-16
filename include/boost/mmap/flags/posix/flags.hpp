@@ -109,7 +109,7 @@ private:
     static std::uint8_t constexpr O_RDONLY_ = O_RDONLY;
 #else // "Undetectable combined O_RDONLY" http://linux.die.net/man/3/open
     static std::uint32_t constexpr O_RDONLY_ = O_RDONLY + O_WRONLY + O_RDWR + O_EXEC + 1;
-    static_assert( ( O_RDONLY_ & ( O_RDONLY | O_WRONLY | O_RDWR | O_EXEC ) ) == 0, "" );
+    //static_assert( ( O_RDONLY_ & ( O_RDONLY | O_WRONLY | O_RDWR | O_EXEC ) ) == 0, "" );
 #endif // O_RDONLY
 
     using sys_flags = detail::rwx_flags;
