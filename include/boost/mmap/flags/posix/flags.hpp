@@ -108,7 +108,7 @@ private:
 #if O_RDONLY
     static std::uint8_t constexpr O_RDONLY_ = O_RDONLY;
 #else // "Undetectable combined O_RDONLY" http://linux.die.net/man/3/open
-    static std::uint8_t constexpr O_RDONLY_ = O_RDONLY + O_WRONLY + O_RDWR + O_EXEC + 1;
+    static std::uint32_t constexpr O_RDONLY_ = O_RDONLY + O_WRONLY + O_RDWR + O_EXEC + 1;
     static_assert( ( O_RDONLY_ & ( O_RDONLY | O_WRONLY | O_RDWR | O_EXEC ) ) == 0, "" );
 #endif // O_RDONLY
 
@@ -201,7 +201,7 @@ public:
     }; // struct system
 
     flags_t BOOST_CC_REG oflag() const noexcept;
-    mode_t  BOOST_CC_REG pmode() const noexcept { return system_access.flags; }
+    mode_t  BOOST_CC_REG pmode() const noexcept { return static_cast<mode_t>(system_access.flags); }
 
     object        object_access;
     child_process child_access ;
